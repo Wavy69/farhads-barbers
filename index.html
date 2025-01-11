@@ -39,7 +39,7 @@
             padding: 1rem;
         }
         .hero {
-            background: url('barber-shop.jpg') no-repeat center center/cover;
+            background: url('images/barber-shop-front.jpg') no-repeat center center/cover;
             height: 400px;
             display: flex;
             align-items: center;
@@ -90,12 +90,6 @@
         .booking-form button:hover {
             background-color: #555;
         }
-        .reviews blockquote {
-            font-style: italic;
-            margin: 1rem 0;
-            border-left: 4px solid #333;
-            padding-left: 1rem;
-        }
         footer {
             background-color: #333;
             color: white;
@@ -104,6 +98,78 @@
             margin-top: 2rem;
         }
     </style>
+    <script>
+        // Simulating booked time slots for demonstration purposes
+        const bookings = [];
+
+        function blockTimeSlots(serviceDuration) {
+            const timeSelect = document.getElementById('time');
+            const selectedTime = timeSelect.value;
+            if (!selectedTime) return;
+
+            // Parse selected time into hours and minutes
+            const [hour, minute] = selectedTime.split(':').map(Number);
+            const selectedDate = new Date(0, 0, 0, hour, minute);
+
+            // Calculate the end time based on service duration
+            const endTime = new Date(selectedDate.getTime() + serviceDuration * 60000);
+
+            // Block time slots
+            const options = timeSelect.options;
+            for (let i = 0; i < options.length; i++) {
+                const optionTime = options[i].value;
+                if (!optionTime) continue;
+
+                const [optionHour, optionMinute] = optionTime.split(':').map(Number);
+                const optionDate = new Date(0, 0, 0, optionHour, optionMinute);
+
+                if (optionDate >= selectedDate && optionDate < endTime) {
+                    options[i].disabled = true;
+                }
+            }
+        }
+
+        function handleBooking(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const service = document.getElementById('service').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+
+            if (!name || !email || !phone || !service || !date || !time) {
+                alert('Please fill out all fields.');
+                return;
+            }
+
+            // Add booking to the simulated database
+            bookings.push({ name, email, phone, service, date, time });
+
+            alert(`Booking confirmed for ${name} on ${date} at ${time} for ${service}`);
+
+            // Clear form and block time slots
+            document.getElementById('booking-form').reset();
+            blockTimeSlots(service === 'haircut' ? 45 : service === 'beard-trim' ? 40 : 45);
+        }
+
+        function populateTimeSlots() {
+            const timeSelect = document.getElementById('time');
+            timeSelect.innerHTML = '';
+
+            for (let hour = 9; hour < 20; hour++) {
+                for (let minute = 0; minute < 60; minute += 15) {
+                    const timeString = `${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}`;
+                    const option = document.createElement('option');
+                    option.value = timeString;
+                    option.textContent = timeString;
+                    timeSelect.appendChild(option);
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', populateTimeSlots);
+    </script>
 </head>
 <body>
 
@@ -129,13 +195,15 @@
         <ul>
             <li><span>Haircut:</span> £20</li>
             <li><span>Beard Trim:</span> £15</li>
-            <li><span>Premium Grooming Package:</span> £35 (Haircut + Beard Trim + Hot Towel)</li>
+            <li><span>Skin Fade u12:</span> £15</li>
+            <li><span>Skin Fade:</span> £25</li>
+            <li><span>Premium Grooming Package:</span> £50 (Haircut + Beard Trim + Hot Towel + Facial)</li>
         </ul>
     </section>
 
     <section id="booking" class="booking-form">
         <h3>Book Your Appointment</h3>
-        <form>
+        <form id="booking-form" onsubmit="handleBooking(event)">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
 
@@ -146,17 +214,18 @@
             <input type="tel" id="phone" name="phone" required>
 
             <label for="service">Select Service:</label>
-            <select id="service" name="service" required>
+            <select id="service" name="service" onchange="blockTimeSlots(this.value === 'haircut' ? 45 : this.value === 'beard-trim' ? 40 : 45)" required>
+                <option value="">Select...</option>
                 <option value="haircut">Haircut (£20)</option>
                 <option value="beard-trim">Beard Trim (£15)</option>
-                <option value="premium">Premium Grooming Package (£35)</option>
+                <option value="skin-fade">Skin Fade (£25)</option>
             </select>
 
             <label for="date">Preferred Date:</label>
             <input type="date" id="date" name="date" required>
 
             <label for="time">Preferred Time:</label>
-            <input type="time" id="time" name="time" required>
+            <select id="time" name="time" required></select>
 
             <button type="submit">Confirm Booking</button>
         </form>
@@ -177,7 +246,7 @@
 </div>
 
 <footer>
-    <p>&copy; 2023 Farhad's Barbers. All Rights Reserved.</p>
+    <p>&copy; 2025 Farhad's Barbers. All Rights Reserved.</p>
 </footer>
 
 </body>
