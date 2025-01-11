@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farhad's Barbers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        nav {
+            background-color: #444;
+            padding: 0.5rem 0;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1rem;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        .hero {
+            background: url('barber-shop.jpg') no-repeat center center/cover;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        .hero h2 {
+            font-size: 2.5rem;
+        }
+        .services, .booking-form, .reviews {
+            background-color: white;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .services h3, .booking-form h3, .reviews h3 {
+            margin-top: 0;
+        }
+        .services ul {
+            list-style: none;
+            padding: 0;
+        }
+        .services ul li {
+            margin: 1rem 0;
+            font-size: 1.1rem;
+        }
+        .services ul li span {
+            font-weight: bold;
+        }
+        .booking-form form {
+            display: flex;
+            flex-direction: column;
+        }
+        .booking-form input, .booking-form select, .booking-form button {
+            margin: 0.5rem 0;
+            padding: 0.8rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .booking-form button {
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+        }
+        .booking-form button:hover {
+            background-color: #555;
+        }
+        .reviews blockquote {
+            font-style: italic;
+            margin: 1rem 0;
+            border-left: 4px solid #333;
+            padding-left: 1rem;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Welcome to Farhad's Barbers</h1>
+</header>
+
+<nav>
+    <div class="container">
+        <a href="#services">Services</a>
+        <a href="#booking">Book Now</a>
+        <a href="#reviews">Reviews</a>
+    </div>
+</nav>
+
+<div class="hero">
+    <h2>Look Sharp, Feel Sharp</h2>
+</div>
+
+<div class="container">
+    <section id="services" class="services">
+        <h3>Our Services</h3>
+        <ul>
+            <li><span>Haircut:</span> £20</li>
+            <li><span>Beard Trim:</span> £15</li>
+            <li><span>Premium Grooming Package:</span> £35 (Haircut + Beard Trim + Hot Towel)</li>
+        </ul>
+    </section>
+
+    <section id="booking" class="booking-form">
+        <h3>Book Your Appointment</h3>
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="service">Select Service:</label>
+            <select id="service" name="service" required>
+                <option value="haircut">Haircut (£20)</option>
+                <option value="beard-trim">Beard Trim (£15)</option>
+                <option value="premium">Premium Grooming Package (£35)</option>
+            </select>
+
+            <label for="date">Preferred Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="time">Preferred Time:</label>
+            <input type="time" id="time" name="time" required>
+
+            <button type="submit">Confirm Booking</button>
+        </form>
+    </section>
+
+    <section id="reviews" class="reviews">
+        <h3>What Our Clients Say</h3>
+        <blockquote>
+            "Farhad’s attention to detail is unmatched. Best barber in town!" – Alex M.
+        </blockquote>
+        <blockquote>
+            "I love the premium grooming package. Worth every penny!" – Solomon A.
+        </blockquote>
+        <blockquote>
+            "Great atmosphere and even better cuts. Highly recommend!" – Mark L.
+        </blockquote>
+    </section>
+</div>
+
+<footer>
+    <p>&copy; 2023 Farhad's Barbers. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
